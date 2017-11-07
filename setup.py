@@ -8,12 +8,15 @@ from willow.image import Image
 #from tkFileDialog import askopenfilename
 
 def exit():
-    tkinter.messagebox.showwarning("QUIT DIALOG","Are you Sure You Want To Quit?")
-    root.destroy()
+    result = tkinter.messagebox.askyesno("QUIT DIALOG","Are you Sure You Want To Quit?")
+    if result == True:
+        root.destroy()
+    
     
 def login_action():
-    os.system('login1.py')
     root.destroy()
+    import login1
+    
 
 def mouseEntered(event):
     button = event.widget
@@ -23,13 +26,21 @@ def mouseExited(event):
     button = event.widget
     button.config(text = "LOGIN")
 
+def mouseEntered_1(event):
+    button = event.widget
+    button.config(text = "Click Here To Quit")
+
+def mouseExited_1(event):
+    button = event.widget
+    button.config(text = "EXIT")
+
 def main():
     global root
     root = Tk()
 
     #root.iconbitmap('new.ico')
     root.geometry('1200x800')
-    root.title('C S M ')
+    root.title('Welcome To C . S . M')
     
     #menu = Menu(root)
     #root.config(menu=menu)
@@ -40,7 +51,9 @@ def main():
     myButton.bind("<Enter>",mouseEntered)
     myButton.bind("<Leave>",mouseExited)
     myButton.pack(side=TOP)
-    b = Button(root, text = "EXIT", bg="red", fg="white", command=exit, width = 10, height = 3)
+    b = Button(root, text = "EXIT", bg="red", fg="white", command=exit, width = 15, height = 3)
+    b.bind("<Enter>",mouseEntered_1)
+    b.bind("<Leave>",mouseExited_1)
     b.pack(side=BOTTOM)
     
 
